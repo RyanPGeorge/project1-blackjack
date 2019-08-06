@@ -3,7 +3,7 @@ var suits = ['s', 'c', 'd', 'h'];
 var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
 // build a 'master' deck of 'card' objects used to create shuffled decks
-var masterDeck = buildMasterDeck();
+var masterDeck;
 //renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
 
 /*----- app's state (variables) -----*/
@@ -15,12 +15,18 @@ var shuffledContainer = document.getElementById('shuffled-deck-container');
 var handContainer = document.getElementById('hand-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', renderShuffledDeck); 
+document.querySelector('button').addEventListener('click', renderPlayerHand); 
 //document.querySelector('hit').addEventListener('click', renderShuffledDeck); 
 //document.querySelector('stay').addEventListener('click', renderShuffledDeck);
 
 /*----- functions -----*/
-function renderShuffledDeck() {
+function init(){
+    masterDeck = buildMasterDeck();
+    shuffledDeck = shuffledDeck();
+}
+init()
+
+function shuffledDeck() {
   // create a copy of the masterDeck (leave masterDeck untouched!)
   var tempDeck = masterDeck.slice();
   shuffledDeck = [];
@@ -28,18 +34,17 @@ function renderShuffledDeck() {
     var rndIdx = Math.floor(Math.random() * tempDeck.length);
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
-  renderDeckInContainer(shuffledDeck, shuffledContainer);
+  return shuffledDeck;
+  //renderDeckInContainer(shuffledDeck, shuffledContainer);
 }
 
-/* function renderPlayerHand() {
-  var tempDeck = shuffledDeck.pop(2, 0);
-  shuffledDeck = [];
-  while (tempDeck.length) {
-    var rndIdx = Math.floor(Math.random() * tempDeck.length);
-    shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
-  }
-  renderDeckInContainer(shuffledDeck, shuffledContainer);
-} */
+function renderPlayerHand() {
+    var tempDeck = shuffledDeck.slice(0,2);
+    playerHand = [];
+    playerHand.push(tempDeck);
+    renderDeckInContainer(playerHand, handContainer);
+    }
+
 
 function renderDeckInContainer(deck, container) {
   container.innerHTML = '';
