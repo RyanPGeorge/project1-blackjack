@@ -15,14 +15,17 @@ var shuffledContainer = document.getElementById('shuffled-deck-container');
 var handContainer = document.getElementById('hand-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', renderPlayerHand); 
-//document.querySelector('hit').addEventListener('click', renderShuffledDeck); 
+document.querySelector('button').addEventListener('click', dealPlayerHand); 
+//document.querySelector('hit').addEventListener('click', hitPlayerHand); 
 //document.querySelector('stay').addEventListener('click', renderShuffledDeck);
 
 /*----- functions -----*/
 function init(){
     masterDeck = buildMasterDeck();
     shuffledDeck = shuffledDeck();
+    dealPlayerHand = dealPlayerHand();
+    //hitPlayerHand = hitPlayerHand();
+    //buttons
 }
 init()
 
@@ -38,19 +41,31 @@ function shuffledDeck() {
   //renderDeckInContainer(shuffledDeck, shuffledContainer);
 }
 
-function renderPlayerHand() {
+function dealPlayerHand() {
     var tempDeck = shuffledDeck.slice(0,2);
     playerHand = [];
     playerHand.push(tempDeck);
     renderDeckInContainer(playerHand, handContainer);
+    //return playerHand;
     }
+    // return playerHand;
 
+
+function hitPlayerHand() {
+    var tempDeck = shuffledDeck.pop();
+    //playerHand = [];
+    playerHand.push(tempDeck);
+    renderDeckInContainer(playerHand, handContainer);
+}
 
 function renderDeckInContainer(deck, container) {
   container.innerHTML = '';
   // Let's build the cards as a string of HTML
   var cardsHtml = deck.reduce(function(html, card) {
-    return html + `<div class="card ${card.face}"></div>`;
+      console.log('card face',card.face)
+      console.log('card OBJ is', card)
+      // higher order array method or for loop to iterate over hand, this function will include the DOM elements to display the card, and values
+    return html + `<div class="card ${card[0 ].face}"></div>`;
   }, '');
   container.innerHTML = cardsHtml;
 }
