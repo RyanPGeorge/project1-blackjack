@@ -10,30 +10,41 @@ html, * {
     justify-content: center;
     align-items: center;
   }
-  
-  main {
-    display: grid;
-    grid-template-columns: 30vmin 15vmin 30vmin;
-    grid-template-rows: 10vmin 10vmin 30vmin 15vmin;
-  }
-  
-  main * {
+
+  h1 {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
   
+  main {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
+  
+ 
   main button {
+    display: inline-block;
     grid-column: span 3;
-    margin: 2vmin;
+    margin: auto;
+  }
+
+  #players {
+      display: grid;
+      justify-self: center;
+  }
+
+  #buttons  {
+    display: inline-flex;
+    margin: auto;
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+    border: 1px solid grey;
+    border-radius: 4px;
+    outline: none;
   }
   
-  #p-hand, #c-hand {
-    border: 2vmin solid white;
-    border-radius: 5vmin;
-    padding: 2vmin;
-  }
-  
-  #p-result img, #c-result img{
-    width: 100%
-  }
+ 
