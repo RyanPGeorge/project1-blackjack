@@ -13,9 +13,10 @@ var playerHand;
 /*----- cached element references -----*/
 var shuffledContainer = document.getElementById('shuffled-deck-container');
 var handContainer = document.getElementById('hand-container');
+var dealerContainer = document.getElementById('dealer-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', dealPlayerHand); 
+document.querySelector('button').addEventListener('click', dealPlayerHand, dealDealerHand); 
 //document.querySelector('hit').addEventListener('click', hitPlayerHand); 
 //document.querySelector('stay').addEventListener('click', renderShuffledDeck);
 
@@ -23,7 +24,7 @@ document.querySelector('button').addEventListener('click', dealPlayerHand);
 function init(){
     masterDeck = buildMasterDeck();
     shuffledDeck = shuffledDeck();
-    dealPlayerHand = dealPlayerHand();
+    //dealPlayerHand = dealPlayerHand();
     //hitPlayerHand = hitPlayerHand();
     //buttons
 }
@@ -41,24 +42,38 @@ function shuffledDeck() {
   //renderDeckInContainer(shuffledDeck, shuffledContainer);
 }
 
+
+// Deal me a hand functions ->
 function dealPlayerHand() {
     var tempDeck = shuffledDeck.slice(0,2);
     playerHand = [];
     playerHand.push(tempDeck);
     renderDeckInContainer(playerHand, handContainer);
-    //return playerHand;
-    }
-    // return playerHand;
+  } 
 
+function dealDealerHand() {
+    var tempDeck = shuffledDeck.slice(0,2);
+    playerHand = [];
+    playerHand.push(tempDeck);
+    renderDeckInContainer(playerHand, dealerContainer);
+  }
+      
 
+//hit functions ->
 function hitPlayerHand() {
     var tempDeck = shuffledDeck.pop();
-    //playerHand = [];
     playerHand.push(tempDeck);
-    renderHandInContainer(playerHand, handContainer);
+    renderdeckInContainer(playerHand, handContainer);
+    return playerHand;
 }
 
-// this will add a card when hit 
+/*
+function dealerHand() {
+if i am pressed for time i will generate a random number value between 10 and 22 to compare to playerHand value. 
+}
+*/
+
+
 function renderDeckInContainer(deck, container) {
   container.innerHTML = '';
   // Let's build the cards as a string of HTML
@@ -71,8 +86,9 @@ function renderDeckInContainer(deck, container) {
   container.innerHTML = cardsHtml;
 }
 
+
 // This will render two cards when game starts
-  function renderHandInContainer(deck, container) {
+  function renderFirstHandInContainer(deck, container) {
     container.innerHTML = '';
     // Let's build the cards as a string of HTML
     var cardsHtml = deck.reduce(function(html, cards) {
@@ -82,6 +98,19 @@ function renderDeckInContainer(deck, container) {
     }, '');
     container.innerHTML = cardsHtml;
   }
+
+
+/* function dealerHand() {
+  // a simple function to generate numeric score between 1 - 25. 
+  // once player hits or stays, it will compare against this numeric dealer score to determine a win or loss against the dealer
+}
+*/
+
+/*
+function winLoss() {
+  //once player hits or stays, this will compare against this numeric dealer score to determine a win or loss against the dealer 
+}
+*/
 
 function buildMasterDeck() {
   var deck = [];
