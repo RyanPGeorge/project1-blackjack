@@ -55,9 +55,10 @@ function hitPlayerHand() {
     var tempDeck = shuffledDeck.pop();
     //playerHand = [];
     playerHand.push(tempDeck);
-    renderDeckInContainer(playerHand, handContainer);
+    renderHandInContainer(playerHand, handContainer);
 }
 
+// this will add a card when hit 
 function renderDeckInContainer(deck, container) {
   container.innerHTML = '';
   // Let's build the cards as a string of HTML
@@ -69,6 +70,18 @@ function renderDeckInContainer(deck, container) {
   }, '');
   container.innerHTML = cardsHtml;
 }
+
+// This will render two cards when game starts
+  function renderHandInContainer(deck, container) {
+    container.innerHTML = '';
+    // Let's build the cards as a string of HTML
+    var cardsHtml = deck.reduce(function(html, cards) {
+
+      return html + `<div class="card ${cards[0].face}"></div>` + `<div class="card ${cards[1].face}"></div>`;
+
+    }, '');
+    container.innerHTML = cardsHtml;
+  }
 
 function buildMasterDeck() {
   var deck = [];
