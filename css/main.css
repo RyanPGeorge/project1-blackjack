@@ -4,6 +4,7 @@ html, * {
   
   html, body {
     height: 100%;
+    background-color: grey;
   }
   
   h1 {
@@ -17,8 +18,9 @@ html, * {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    border: 10px solid grey;
-  
+    margin: 10px;
+    background-color: #477148;
+    border: 10px solid #c19a6b;
   }
 
   .score-container {
@@ -26,7 +28,6 @@ html, * {
     flex-wrap: wrap;
     justify-content: flex-start;
     border: 10px solid grey;
-  
   }
   
   button {
@@ -41,6 +42,6 @@ html, * {
   }
   
   button:hover {
-    background-color: grey;
+    background-color: lightgrey;
     color: white;
   }
