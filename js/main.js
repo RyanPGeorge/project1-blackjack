@@ -41,9 +41,9 @@ var masterDeck;
 
 /*----- app's state (variables) -----*/
 var shuffledDeck;
-var playerHand = [];
-var playerScore = 21;
-var gameWinLose;
+var playerHand;
+var playerScore;
+var shouldGameRun; // if a player busts, the game should not run, likewise if the player blackjacks
 
 /*----- cached element references -----*/
 //var shuffledContainer = document.getElementById('shuffled-deck-container');
@@ -52,17 +52,24 @@ var dealerContainer = document.getElementById('dealer-container');
 var scoreContainer = document.getElementById('score-container');
 
 /*----- event listeners -----*/
-document.getElementById('deal-button').addEventListener('click', renderPlayerDeal); 
-document.getElementById('hit-button').addEventListener('click', renderPlayerHit); 
+document.getElementById('deal-button').addEventListener('click', handlePlayerDeal); 
+document.getElementById('hit-button').addEventListener('click', handleHit); 
+document.getElementById('reset').addEventListener('click', init); 
 //document.getElementById('deal-button').addEventListener('click', stayPlayerHand); 
 
 
 /*----- functions -----*/
-function init(){
-    masterDeck = buildMasterDeck();
-    shuffledDeck = shuffledDeck();
-}
 init()
+
+function init(){
+    playerScore = 0;
+    playerHand = [];
+    shouldGameRun = true // at the start, the game SHOULD run
+    handContainer.innerHTML = "";
+    masterDeck = buildMasterDeck(); 
+    shuffledDeck = handleShuffleDeck();
+    render();
+}
 
 function buildMasterDeck() {
   var deck = [];
@@ -79,7 +86,7 @@ function buildMasterDeck() {
   return deck;
 }
 
-function shuffledDeck() {
+function handleShuffleDeck() {
   // create a copy of the masterDeck (leave masterDeck untouched!)
   var tempDeck = masterDeck.slice();
   shuffledDeck = [];
@@ -103,70 +110,64 @@ function renderDeckInContainer(deck, container) {
   container.innerHTML = cardsHtml;
 }
 
-/*
+
+/* table this, work on if else for win lose
 function renderScoreInContainer(playerScore, scorecontainer) {
   scorecontainer.innerHTML = '';
   var scoreHtml = deck.reduce(function(html, card) {
-    return html + `<div class="card" ${card.value}"</div>`
+    return html + `<span class="score-container" ${card.value}"</span>`
   }
   scorecontainer.innerHTML = scoreHtml;
 }
 */
 
 
-
-
 // Deal me a hand functions ->
-function renderPlayerDeal() {
+function handlePlayerDeal() {
+    if(!shouldGameRun || playerHand.length > 0) return;
     var tempDeck = shuffledDeck.slice(0,2);
-    playerHand = [];
     playerHand = playerHand.concat(tempDeck);
+    playerScore = handleUpdateScore();
     renderDeckInContainer(playerHand, handContainer);
+    render();
 }
 
-function renderPlayerHit() {
-    var tempDeck = shuffledDeck.pop();
-    playerHand = playerHand.concat(tempDeck);
+function handleHit() {
+    if(!shouldGameRun) return;
+    playerHand = playerHand.concat(shuffledDeck.pop());
+    playerScore = handleUpdateScore();
     renderDeckInContainer(playerHand, handContainer);
+    render();
 }
 
+function handleUpdateScore() {
+    return playerHand.reduce((acc, element) => {
+      return acc + element.value;
+    }, 0);
+}
+
+
+function render() {
+  scoreContainer.innerHTML = handleWinLose()
+}
 /* drafts of update score counter logic
-function renderPlayerScore() {
-  playerScore = 0;
-  playerHand.forEach(card => {
-      playerScore = playerScore + card.value;
-    })
-    console.log(sum)
-    checkValue(sum)
+//win lose logic
+
+*/
+
+
+function handleWinLose() {
+  if(playerScore < 21) {
+    return `Your Score Is: ${playerScore}`
+  }else if (playerScore === 21) {
+    shouldGameRun = false
+    return 'BlackJacked!';
+  } else {
+    shouldGameRun = false;
+    return 'Bust!';
   }
 }
-*/
 
-/*
-function renderWinLose() {
-  playerScore = 0;
-  playerHand.forEach(card => {
-    playerScore = playerScore + card.value;
-  });
-
-  if (playerScore > 21) {
-    gameWinLose = 'You lost!';
-  }
-
-  else if (playerScore == 21) {
-    gameWinLose = 'You won!';
-
-  }
-  else {
-    gameWinLose = '';
-  }
-*/
-
-/* //win lose logic
-function gameWinLose () {
-
-}
-*/
 
 
 /*
