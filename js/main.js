@@ -1,9 +1,9 @@
 
-// deal two cards and by pushing them into player hand array *CHECKKKKKK*
+//DONE//deal two cards and by pushing them into player hand array
 
-// if player wishes, he can hit, at which point another card will be pushed into the player hand arrr, from the deck
+//DONE// if player wishes, he can hit, at which point another card will be pushed into the player hand arrr, from the deck
 
-// after each hit, evaluate if player is at 21 or bust. If under 21 allow option to hit to remain open. 
+//IN PROGRESS// after each hit, evaluate if player is at 21 or bust. If under 21 allow option to hit to remain open. 
 
 // set up onclick event functions 
 
@@ -43,19 +43,20 @@ var masterDeck;
 /*----- app's state (variables) -----*/
 var shuffledDeck;
 var playerHand = [];
-// player hand value
+var playerScore;
+var gameWinLose;
 
 /*----- cached element references -----*/
 //var shuffledContainer = document.getElementById('shuffled-deck-container');
 var handContainer = document.getElementById('hand-container');
 var dealerContainer = document.getElementById('dealer-container');
+var scoreContainer = document.getElementById('score-container');
 
 /*----- event listeners -----*/
-document.getElementById('deal-button').addEventListener('click', dealPlayerHand); 
-document.getElementById('hit-button').addEventListener('click', hitPlayerHand); 
-//document.getElementById('deal-button').addEventListener('click', dealPlayerHand); 
-//document.querySelector('hit').addEventListener('click', hitPlayerHand); 
-//document.querySelector('stay').addEventListener('click', renderShuffledDeck);
+document.getElementById('deal-button').addEventListener('click', renderPlayerDeal); 
+document.getElementById('hit-button').addEventListener('click', renderPlayerHit); 
+//document.getElementById('deal-button').addEventListener('click', stayPlayerHand); 
+
 
 /*----- functions -----*/
 function init(){
@@ -103,35 +104,67 @@ function renderDeckInContainer(deck, container) {
   container.innerHTML = cardsHtml;
 }
 
+/*
+function renderScoreInContainer(score, score-container) {
+  scorecontainer.innerHTML = 
+  var scoreHtml = 
+}
+*/
+
+
+
+
 // Deal me a hand functions ->
-function dealPlayerHand() {
+function renderPlayerDeal() {
     var tempDeck = shuffledDeck.slice(0,2);
     playerHand = [];
     playerHand = playerHand.concat(tempDeck);
-    renderDeckInContainer(playerHand, handContainer); 
-}
-
-function hitPlayerHand() {
-    var hitCard = shuffledDeck.pop();
-    playerHand = playerHand.concat(hitCard);
     renderDeckInContainer(playerHand, handContainer);
 }
 
+function renderPlayerHit() {
+    var tempDeck = shuffledDeck.pop();
+    playerHand = playerHand.concat(tempDeck);
+    renderDeckInContainer(playerHand, handContainer);
+}
+
+/*
 function renderPlayerScore() {
-  getScore = (playerHand) => {
-    let hand = [...playerHand]
-    hand.forEach(playerHand => {
-      let sum =+ playerHand.value
-      return sum
+  playerScore = 0;
+  playerHand.forEach(card => {
+      playerScore = playerScore + card.value;
     })
     console.log(sum)
     checkValue(sum)
   }
 }
+*/
 
+
+/*
+function renderPlayerScore() {
+  playerScore = 0;
+  playerHand.forEach(card => {
+    playerScore = playerScore + card.value;
+  });
+
+  if (playerScore > 21) {
+    gameOutcome = 'You lost!';
+  }
+  else if (playerScore == 21) {
+    gameOutcome = 'You won!';
+  }
+  else {
+    gameOutcome = '';
+  }
+*/
+
+/*
 function ArrRenderEx () {
 
 }
+*/
+
 
 /*
 // This will render two cards when game starts (SAL)
