@@ -1,5 +1,4 @@
 
-
 // deal two cards and by pushing them into player hand array *CHECKKKKKK*
 
 // if player wishes, he can hit, at which point another card will be pushed into the player hand arrr, from the deck
@@ -8,9 +7,9 @@
 
 // set up onclick event functions 
 
-/* findSum = (playerHand) => {
+/*
+getScore = (playerHand) => {
   let hand = [...playerHand]
-
   hand.forEach(card => {
     let sum =+ card.value
     return sum
@@ -19,6 +18,7 @@
   checkValue(sum)
 }
 
+ 
 checkValue = () => {
   if (sum > 21) {
     //bust you loose
@@ -51,7 +51,9 @@ var handContainer = document.getElementById('hand-container');
 var dealerContainer = document.getElementById('dealer-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', dealPlayerHand); 
+document.getElementById('deal-button').addEventListener('click', dealPlayerHand); 
+document.getElementById('hit-button').addEventListener('click', hitPlayerHand); 
+//document.getElementById('deal-button').addEventListener('click', dealPlayerHand); 
 //document.querySelector('hit').addEventListener('click', hitPlayerHand); 
 //document.querySelector('stay').addEventListener('click', renderShuffledDeck);
 
@@ -116,7 +118,15 @@ function hitPlayerHand() {
 }
 
 function renderPlayerScore() {
-  
+  getScore = (playerHand) => {
+    let hand = [...playerHand]
+    hand.forEach(playerHand => {
+      let sum =+ playerHand.value
+      return sum
+    })
+    console.log(sum)
+    checkValue(sum)
+  }
 }
 
 function ArrRenderEx () {
