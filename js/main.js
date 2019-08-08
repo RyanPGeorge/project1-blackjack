@@ -104,9 +104,12 @@ function renderDeckInContainer(deck, container) {
 }
 
 /*
-function renderScoreInContainer(score, score-container) {
-  scorecontainer.innerHTML = 
-  var scoreHtml = 
+function renderScoreInContainer(playerScore, scorecontainer) {
+  scorecontainer.innerHTML = '';
+  var scoreHtml = deck.reduce(function(html, card) {
+    return html + `<div class="card" ${card.value}"</div>`
+  }
+  scorecontainer.innerHTML = scoreHtml;
 }
 */
 
@@ -140,7 +143,7 @@ function renderPlayerScore() {
 */
 
 /*
-function renderGameOutcome() {
+function renderWinLose() {
   playerScore = 0;
   playerHand.forEach(card => {
     playerScore = playerScore + card.value;
