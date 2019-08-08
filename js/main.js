@@ -42,7 +42,7 @@ var masterDeck;
 /*----- app's state (variables) -----*/
 var shuffledDeck;
 var playerHand = [];
-var playerScore;
+var playerScore = 21;
 var gameWinLose;
 
 /*----- cached element references -----*/
@@ -127,7 +127,7 @@ function renderPlayerHit() {
     renderDeckInContainer(playerHand, handContainer);
 }
 
-/*
+/* drafts of update score counter logic
 function renderPlayerScore() {
   playerScore = 0;
   playerHand.forEach(card => {
@@ -139,27 +139,28 @@ function renderPlayerScore() {
 }
 */
 
-
 /*
-function renderPlayerScore() {
+function renderGameOutcome() {
   playerScore = 0;
   playerHand.forEach(card => {
     playerScore = playerScore + card.value;
   });
 
   if (playerScore > 21) {
-    gameOutcome = 'You lost!';
+    gameWinLose = 'You lost!';
   }
+
   else if (playerScore == 21) {
-    gameOutcome = 'You won!';
+    gameWinLose = 'You won!';
+
   }
   else {
-    gameOutcome = '';
+    gameWinLose = '';
   }
 */
 
-/*
-function ArrRenderEx () {
+/* //win lose logic
+function gameWinLose () {
 
 }
 */
