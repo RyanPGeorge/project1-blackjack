@@ -9,7 +9,6 @@
 
 /*
 getScore = (playerHand) => {
-  let hand = [...playerHand]
   hand.forEach(card => {
     let sum =+ card.value
     return sum
