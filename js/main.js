@@ -94,10 +94,10 @@ function handleWinLose() {
     return `Your Score Is: ${playerScore}`;
   }else if (playerScore === 21) {
     shouldGameRun = false
-    return 'BlackJacked!';
+    return 'BLACKJACK!! YOU WIN!!';
   } else {
     shouldGameRun = false;
-    return 'Bust!';
+    return 'BUST! You Lose!!';
   }
 }
 

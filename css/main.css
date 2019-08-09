@@ -1,5 +1,5 @@
 html, * {
-    box-sizing: border-box;
+    box-sizing: border-box; 
   }
   
   html, body {
@@ -24,10 +24,12 @@ html, * {
   }
 
   .score-container {
+    font-size: xx-large;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    border: 10px solid grey;
+    justify-content: center;
+    color: white;
+    border: 2px dotted black;
   }
   
   button {
@@ -37,7 +39,7 @@ html, * {
     font-size: 16px;
     color: black;
     background-color: whitesmoke;
-    border: 1px solid grey;
+    border: 1px solid black;
     border-radius: 4px;
     outline: none;
   }
