@@ -2,7 +2,7 @@
 
 -A PROJECT BY RYAN GEORGE-
 
-This is my first game, a simple take on the perennial classic parlor game: BLACKJACK.
+This is my first game, a simple take on the classic card game: BLACKJACK.
 
 
 
