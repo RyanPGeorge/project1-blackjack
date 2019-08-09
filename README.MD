@@ -24,7 +24,9 @@ Technologies Used:Javascript, HTML, CSS
 ![Screenshot4](screenshots/blackjack-sc4.png)
 
 
-NEXT STEPS: (ICEBOX)
+NEXT STEPS:
+
+(ICEBOX)
 In the future, I plan to implement:
 * 2-player functionality for head to head gameplay
 * Dealer gameplay functionality that will allow a player to stay, and compare their hand against the dealer's generated hand
